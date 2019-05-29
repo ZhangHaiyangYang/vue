@@ -13,7 +13,7 @@
 </van-swipe>
 <van-card v-for="items in arr" @click="change(items._id)"  :key="items._id"
   :price="items.price"
-  :desc="items.descriptions"  
+  :desc="items.descriptions"
   :title="items.name"
   :thumb="'http://api.cat-shop.penkuoer.com'+items.coverImg"
 
@@ -53,7 +53,7 @@ export default {
     },
    created() {
     axios
-      .get("http://api.cat-shop.penkuoer.com/api/v1/products", {
+      .get("https://api.cat-shop.penkuoer.com/api/v1/products", {
         params: {
           page: 2
         }
@@ -61,7 +61,8 @@ export default {
       .then(datas => {
         this.arr = datas.data.products;
       });
-  }
+  },
+  
 }
 </script>
 
