@@ -1,28 +1,67 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <header>
+    <van-nav-bar
+      
+      left-text="返回" 
+      right-text="扫一扫"
+       border=true
+
+      @click-left="onClickLeft"
+      @click-right="onClickRight"
+    />
+    <form action="/">
+       <van-search
+    placeholder="请输入搜索关键词"
+  />
+</form>
+  </header>
+<div class="list">
+  <transition :name="transitionName">
+<router-view></router-view>
+  </transition>
+</div>
+
   </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
+  name: "app",
+  components: {},
+   data() {
+    return {
+     
+
+    }
+  },
+  
+  methods: {
+    onClickLeft() {
+      window.history.go(-1); 
+     
+    },
+  
+    onClickRight() {}
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+html ,body{
+  height: 100%;
 }
+#app{
+  height: 100%;
+  display: flex;
+  flex-direction: column
+}
+
+.van-swipe img{
+  width: 100%;
+  height: 200px;
+}
+.list{
+  overflow: auto
+}
+
 </style>
