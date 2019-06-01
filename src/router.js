@@ -24,6 +24,7 @@ const router =new Router({
       path:'/cart',
       component:cart,
       name:'cart',
+      meta:{login:true}
    
     },
     {
