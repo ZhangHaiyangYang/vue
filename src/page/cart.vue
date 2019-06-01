@@ -1,56 +1,31 @@
 <template>
-<div>
+<div id="box">
+<h1><span>我的购物车</span><span>管理</span></h1>
+<div id="cont">
+<van-card v-for ="i in 15 " :key="i"
 
-<table>
-    <tr v-for="item in newarr" :key="item._id">
-      <td><img :src="'http://api.cat-shop.penkuoer.com'+item.coverImg"/></td>
-      <td>{{item.name}}</td>
-      <td>{{item.price}}元</td>
-    </tr>
-</table>
+/>
+</div>
 <van-submit-bar
   :price="3050"
   button-text="提交订单"
-/>
+ 
+>
+  <van-checkbox v-model="checked">全选</van-checkbox>
+</van-submit-bar>
+
 </div>
 </template>
 <script>
+
   import  axios from 'axios';
 export default {
     data()
     {
         return{
-            imageURL:'../img/01.jpg',
-            carts:{},
-            arr:[],
-            newarr:[],
-            obj:{name:"张海洋",age:20}
-        }
-    },
-    created(){
-           this.carts=localStorage.getItem('cart');
-            axios
-      .get("http://api.cat-shop.penkuoer.com/api/v1/products", {
-        params: {
-          page: 2
-        }
-      })
-      .then(datas => {
-        this.arr = datas.data.products;
-           
-        for(var items in JSON.parse(this.carts))
-        {  
-            for(var i=0;i<this.arr.length;i++)
-            {
-                if(this.arr[i]._id==items)
-                {
-                    this.newarr.push(this.arr[i]);
-                }
-            }
-        }
+          checked:false
         
-      });
-           
+        }
     },
 }
 </script>
@@ -58,6 +33,23 @@ export default {
 img{
     width: 50px;
     height: 50px;
+}
+h1{
+  height: 50px;
+  background:pink;
+  display: flex;
+  justify-content:space-between;
+  line-height: 50px;
+ 
+}
+#box{
+  overflow: auto;
+  background: pink
+}
+#cont .van-card{
+ border: 1px solid orange;
+   border-radius: 20px;
+   height: 150px;
 }
 </style>
 
