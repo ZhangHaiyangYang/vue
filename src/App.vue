@@ -54,12 +54,16 @@ html ,body{
   flex-direction: column
 }
 
+
 .van-swipe img{
   width: 100%;
   height: 200px;
 }
 
-
+.van-tabbar--fixed
+{
+  box-sizing: border-box;
+}
 #app .van-submit-bar{
   bottom: 50px;
 }

@@ -5,7 +5,6 @@ import App from './App.vue'
 import router from './router'
 import stroe from './stroe/index'
 Vue.use(Vant);
-
 Vue.config.productionTip = false;
 new Vue({
   store: stroe,

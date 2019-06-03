@@ -81,8 +81,7 @@ axios.post('http://api.cat-shop.penkuoer.com/api/v1/common/file_upload',formdata
                {
                    axios.post('http://api.cat-shop.penkuoer.com/api/v1/auth/reg',this.user).then((res)=>{
                 
-                     localStorage.setItem('token',res.data.token)
-
+                     localStorage.setItem('token',res.data.token);
                    })
                }
                else{

@@ -46,7 +46,7 @@ const router =new Router({
     {
       if(localStorage.getItem('token'))
       {
-         next({name:'cart'})
+         next()
       }
       else{
         next({name:'user'})

@@ -75,19 +75,18 @@ export default {
    created() {
      this.getdata();
       this.$nextTick(()=>{
-        
         const box=document.querySelector('#box');
         box.onscroll=()=>{
           const  cheight=box.clientHeight;
           const  sheight=box.scrollHeight;
           const stop=box.scrollTop;
-        
           if(cheight+stop==sheight)
           {
             
             this.pages++;
             if(this.pages>this.pa)
             {
+
               return false;
             }
             this.getdata();
@@ -96,7 +95,6 @@ export default {
 
       })
 
-       
   },
 
 }
@@ -104,7 +102,8 @@ export default {
 </script>
 <style scoped>
 #box{
-  overflow: auto
+  overflow: auto;
+  padding-bottom: 80px
 }
 </style>
 

@@ -26,7 +26,7 @@
       <van-goods-action-mini-btn icon="chat-o" @click="sorry">
         客服
       </van-goods-action-mini-btn>
-      <van-goods-action-mini-btn :info="nums" icon="cart-o">
+      <van-goods-action-mini-btn :info="nums" icon="cart-o" @click="cart">
         购物车
       </van-goods-action-mini-btn>
       <van-goods-action-big-btn @click="goumai">
@@ -96,14 +96,17 @@ export default {
   },
  
   methods: {
+   
       getnums()
       {
+         if(localStorage.getItem('token'))
+    {
             axios.get('https://api.cat-shop.penkuoer.com/api/v1/shop_carts',{
                     headers:{
                          authorization:`Bearer ${localStorage.getItem('token')}`
                     }
                 }).then((res)=>{
-                    console.log(res)
+                    
                     
                     for(var i=0;i<res.data.length;i++)
                     {
@@ -112,11 +115,16 @@ export default {
                 })
 
               
+      }
+      },
+      cart()
+      {
+           this.$router.push('cart');
       },
 
     addcart() {
         this.show=true;
-     //this.$router.push('cart');
+   
     },
     sorry() {
       Toast('暂无门店');
@@ -126,6 +134,11 @@ export default {
 
     },
     sure(){
+
+            if(localStorage.getItem('token'))
+            {
+
+            
         axios.post('https://api.cat-shop.penkuoer.com/api/v1/shop_carts',{product:this.$route.query.ids,quantity:this.value},{headers:{
 
             authorization:`Bearer ${localStorage.getItem('token')}`
@@ -139,7 +152,16 @@ export default {
             }
         })
 
+    }
+    else{
+       if(confirm('请先登录'))
+       {
+         this.$router.push({name:'user'});
+       }
+       
+    }
     },
+    
     close()
     {
         this.show=false;
@@ -196,7 +218,6 @@ export default {
     padding-top: 30px
 }
 h1{
-    border: 1px solid orange;
     display: flex;
     justify-content: space-around;
     font-size: 15px;

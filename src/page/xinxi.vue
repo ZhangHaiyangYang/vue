@@ -9,7 +9,6 @@ title="陈钰琪"
 </template>
 <script>
 export default {
-   
     data()
     {
         return{

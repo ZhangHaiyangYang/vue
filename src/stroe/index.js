@@ -6,7 +6,6 @@ const store=new vuex.Store({
         isshow:true
     },
     mutations:{
-
         change(state,val)
         {
             state.isshow=val;
