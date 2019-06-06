@@ -28,15 +28,39 @@ const router =new Router({
    
     },
     {
+      path:'/geren',
+        component:()=> import ('./page/geren.vue'),
+      name:'geren',
+      meta:{login:true}
+    
+    },
+    {
       path:'/xq',
       component: xq,
       name:'xq',
      
     },
+   
+    {
+      path:'/adress',
+      component:()=> import('./page/adress.vue'),
+
+      name:'adress',
+    },
+    {
+      path:'/adresslist',
+      component :()=>import ('./page/adresslist.vue'),
+      name:'adresslist'
+    },
     {
       path:'/user',
         component:()=>import('./page/user.vue'),
-        name:'user'
+        name:'user',
+    },
+    {
+      path:'/suer',
+      name:'suer',
+      component :()=>import('./page/suer.vue')
     }
   ]
   });

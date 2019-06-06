@@ -36,20 +36,22 @@
 </van-cell-group>
  <van-uploader name="uploader" :after-read="addimg">
  
-  <img width="80px" height="80px" class="head-img" src="img/user.jpg" ref="goodsImg"/>
+  <img width="50px" height="50px" class="head-img" src="img/user.jpg" ref="goodsImg"/>
 </van-uploader>
 <p><button class="bu">登录</button> <button @click="adduser" class="bu">注册</button></p>
-
+<van-dialog v-model="show" title="请输入用户名及密码" show-cancel-button></van-dialog>
 </div>
 </template>
 <script>
 import { constants } from 'crypto';
 import axios from 'axios';
+import { Notify } from 'vant';
 export default {
     data()
     {
         return{
             password2:'',
+            show:false,
             user:{
                 userName:'',
                 password:'',
@@ -73,7 +75,7 @@ axios.post('http://api.cat-shop.penkuoer.com/api/v1/common/file_upload',formdata
         },
         adduser()
         {
-            console.log(this.user)
+            
             
            if(this.user.userName && this.user.password&&this.user.nickName)
            {
@@ -85,14 +87,16 @@ axios.post('http://api.cat-shop.penkuoer.com/api/v1/common/file_upload',formdata
                    })
                }
                else{
-                  alert('两次输入的结果不一样！')
+                 this.show=!this.show
                }
           
            }
            else{
-               alert("请输入正确的信息！")
+             
+              this.show=!this.show;
       
            }
+          
         }
 
     }
@@ -119,6 +123,9 @@ axios.post('http://api.cat-shop.penkuoer.com/api/v1/common/file_upload',formdata
 }
 .add{
     line-height: 50px
+}
+img{
+  
 }
 </style>
 

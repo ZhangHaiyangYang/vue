@@ -65,7 +65,8 @@ import {
   SwipeItem,
   GoodsAction,
   GoodsActionBigBtn,
-  GoodsActionMiniBtn
+  GoodsActionMiniBtn,
+  Notify
 } from 'vant';
 export default {
   components: {
@@ -92,16 +93,15 @@ export default {
   },
   created(){
       this.getnums();
-      axios.get('https://api.cat-shop.penkuoer.com/api/v1/products/'+this.$route.query.ids).then(res=>this.goods=res.data);
+      axios.get('http://api.cat-shop.penkuoer.com/api/v1/products/'+this.$route.query.ids).then(res=>this.goods=res.data);
   },
- 
   methods: {
    
       getnums()
       {
          if(localStorage.getItem('token'))
-    {
-            axios.get('https://api.cat-shop.penkuoer.com/api/v1/shop_carts',{
+    {  
+            axios.get('http://api.cat-shop.penkuoer.com/api/v1/shop_carts',{
                     headers:{
                          authorization:`Bearer ${localStorage.getItem('token')}`
                     }
@@ -139,14 +139,14 @@ export default {
             {
 
             
-        axios.post('https://api.cat-shop.penkuoer.com/api/v1/shop_carts',{product:this.$route.query.ids,quantity:this.value},{headers:{
+        axios.post('http://api.cat-shop.penkuoer.com/api/v1/shop_carts',{product:this.$route.query.ids,quantity:this.value},{headers:{
 
             authorization:`Bearer ${localStorage.getItem('token')}`
         }}).then((res)=>{
             if(res.data.code="succsess")
             {
-                this.nums=0
-                alert("加入购物车成功");
+                this.nums=0;
+              Notify('加入购物车成功')
                 this.getnums();
                 this.show=false;
             }
@@ -170,13 +170,17 @@ export default {
   filters:{
       imgs(val)
       {
-          return 'https://api.cat-shop.penkuoer.com'+val;
+        if(val)
+        {
+          return 'http://api.cat-shop.penkuoer.com/'+val;
+        }
+        return ''
+        
       }
-
   }
 };
 </script>
-<style>
+<style scoped>
 .goods {
   padding-bottom: 50px;
   &-swipe {

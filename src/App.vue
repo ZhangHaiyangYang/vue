@@ -9,14 +9,14 @@
   </header>
 <router-view></router-view>
  <template>
-<van-tabbar  active-color="orange"
-      inactive-color="#000"
+<van-tabbar  
     route=true
+    v-model="active"
     v-show="isshow">
   <van-tabbar-item icon="home-o" :to="{name:'index'}">首页</van-tabbar-item>
   <van-tabbar-item icon="comment" :to="{name:'xinxi'}">信息</van-tabbar-item>
   <van-tabbar-item icon="shopping-cart" :to="{name:'cart'}">购物车</van-tabbar-item>
-  <van-tabbar-item icon="setting-o">个人中心</van-tabbar-item>
+  <van-tabbar-item icon="setting-o" :to="{name:'geren'}">个人中心</van-tabbar-item>
 </van-tabbar>
 </template>
   </div>
@@ -31,6 +31,7 @@ export default {
 
    data() {
     return {
+      action:0
     }
   },
   methods: {

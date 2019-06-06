@@ -20,7 +20,7 @@
   :price="items.price"
   :desc="items.descriptions"
   :title="items.name"
-  :thumb="'https://api.cat-shop.penkuoer.com'+items.coverImg"
+  :thumb="'http://api.cat-shop.penkuoer.com'+items.coverImg"
 />
 </div>
 
@@ -47,7 +47,6 @@ export default {
 
     },
     methods:{
-     
           change(id)
           {
            
@@ -59,13 +58,11 @@ export default {
       .get("https://api.cat-shop.penkuoer.com/api/v1/products",{
         params: {
           page: this.pages,
-         
-
         }
       })
       .then(datas => {
         this.arr = this.arr.concat(datas.data.products);
-        this.pa= datas.data.pages
+        this.pa= datas.data.pages;
       });
      },
      
@@ -73,16 +70,19 @@ export default {
     },
    
    created() {
+          
      this.getdata();
       this.$nextTick(()=>{
+        
         const box=document.querySelector('#box');
         box.onscroll=()=>{
+          
           const  cheight=box.clientHeight;
           const  sheight=box.scrollHeight;
           const stop=box.scrollTop;
-          if(cheight+stop==sheight)
+          
+          if(cheight+stop>=sheight)
           {
-            
             this.pages++;
             if(this.pages>this.pa)
             {
@@ -92,8 +92,8 @@ export default {
             this.getdata();
           } 
         }
-
       })
+      
 
   },
 
