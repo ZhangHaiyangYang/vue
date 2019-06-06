@@ -46,7 +46,7 @@ export default {
          this.obj.regions=cont.province+'-'+cont.city+'-'+cont.county;
          this.obj.address=cont.addressDetail;
          this.obj.isDefault=cont.isDefault;
-      axios.post('http://api.cat-shop.penkuoer.com/api/v1/addresses',this.obj,{headers:{
+      axios.post('https://api.cat-shop.penkuoer.com/api/v1/addresses',this.obj,{headers:{
         authorization:`Bearer ${localStorage.getItem('token')}`
       }}).then((res)=>{
         console.log

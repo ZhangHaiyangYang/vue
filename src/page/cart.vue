@@ -11,7 +11,7 @@
 <van-card
   :price="item.product.price"
   :desc="item.product.descriptions"  
-  :thumb="'http://api.cat-shop.penkuoer.com'+item.product.coverImg"
+  :thumb="'https://api.cat-shop.penkuoer.com'+item.product.coverImg"
 />
 <span class="nums"><van-stepper @minus="jian(item.product.price,item.quantity,item.checked)" @plus="addn(item.product.price,item.quantity,item.checked)" :integer=flags v-model="item.quantity"/></span>
   </li>
@@ -53,14 +53,11 @@ export default {
     created()
                        {
   
-            axios.get('http://api.cat-shop.penkuoer.com/api/v1/shop_carts',{
+            axios.get('https://api.cat-shop.penkuoer.com/api/v1/shop_carts',{
                     headers:{
                          authorization:`Bearer ${localStorage.getItem('token')}`
                     }
                 }).then((res)=>{
-                    
-              
-              
                   for(var i=0;i<res.data.length;i++)
                   {
                     if(res.data[i].product)
@@ -147,7 +144,7 @@ export default {
      {
        if(this.prices>0)
        {
-        axios.get('http://api.cat-shop.penkuoer.com/api/v1/addresses',{
+        axios.get('https://api.cat-shop.penkuoer.com/api/v1/addresses',{
                     headers:{
                          authorization:`Bearer ${localStorage.getItem('token')}`
                     }

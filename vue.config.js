@@ -12,5 +12,6 @@ module.exports = {
       postCompile: false,
       theme: false
     }
-  }
+  },
+ // publicPath:'/zhanghaiyang/'
 }

@@ -93,7 +93,7 @@ export default {
   },
   created(){
       this.getnums();
-      axios.get('http://api.cat-shop.penkuoer.com/api/v1/products/'+this.$route.query.ids).then(res=>this.goods=res.data);
+      axios.get('https://api.cat-shop.penkuoer.com/api/v1/products/'+this.$route.query.ids).then(res=>this.goods=res.data);
   },
   methods: {
    
@@ -101,7 +101,7 @@ export default {
       {
          if(localStorage.getItem('token'))
     {  
-            axios.get('http://api.cat-shop.penkuoer.com/api/v1/shop_carts',{
+            axios.get('https://api.cat-shop.penkuoer.com/api/v1/shop_carts',{
                     headers:{
                          authorization:`Bearer ${localStorage.getItem('token')}`
                     }
@@ -139,7 +139,7 @@ export default {
             {
 
             
-        axios.post('http://api.cat-shop.penkuoer.com/api/v1/shop_carts',{product:this.$route.query.ids,quantity:this.value},{headers:{
+        axios.post('https://api.cat-shop.penkuoer.com/api/v1/shop_carts',{product:this.$route.query.ids,quantity:this.value},{headers:{
 
             authorization:`Bearer ${localStorage.getItem('token')}`
         }}).then((res)=>{
@@ -172,7 +172,7 @@ export default {
       {
         if(val)
         {
-          return 'http://api.cat-shop.penkuoer.com/'+val;
+          return 'https://api.cat-shop.penkuoer.com/'+val;
         }
         return ''
         

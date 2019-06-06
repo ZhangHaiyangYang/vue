@@ -67,7 +67,7 @@ export default {
            this.$refs.goodsImg.src = files.content;
            var formdata=new FormData();
            formdata.append('file',files.file);
-axios.post('http://api.cat-shop.penkuoer.com/api/v1/common/file_upload',formdata,{'Cont-Type':'multipart/form-data'}).then((res)=>{
+axios.post('https://api.cat-shop.penkuoer.com/api/v1/common/file_upload',formdata,{'Cont-Type':'multipart/form-data'}).then((res)=>{
                this.user.avatar=res.data.info;
                })
 
@@ -81,7 +81,7 @@ axios.post('http://api.cat-shop.penkuoer.com/api/v1/common/file_upload',formdata
            {
                if(this.password2==this.user.password)
                {
-                   axios.post('http://api.cat-shop.penkuoer.com/api/v1/auth/reg',this.user).then((res)=>{
+                   axios.post('https://api.cat-shop.penkuoer.com/api/v1/auth/reg',this.user).then((res)=>{
                 
                      localStorage.setItem('token',res.data.token);
                    })

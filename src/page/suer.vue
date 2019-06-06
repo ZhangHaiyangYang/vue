@@ -59,7 +59,7 @@ export default {
     filters:{
         img(val)
         {
-            return val? 'http://api.cat-shop.penkuoer.com'+val :''
+            return val? 'https://api.cat-shop.penkuoer.com'+val :''
         }
     },
     methods:{
@@ -103,7 +103,7 @@ export default {
       
         }
         else{
-            axios.get('http://api.cat-shop.penkuoer.com/api/v1/addresses',{headers:{
+            axios.get('https://api.cat-shop.penkuoer.com/api/v1/addresses',{headers:{
          authorization:`Bearer ${localStorage.getItem('token')}`
     }}).then((res)=>{
           res.data.addresses.forEach(item => {

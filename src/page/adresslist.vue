@@ -11,7 +11,7 @@
     import axios from 'axios'
     export default {
         created(){
-    axios.get('http://api.cat-shop.penkuoer.com/api/v1/addresses',{headers:{
+    axios.get('https://api.cat-shop.penkuoer.com/api/v1/addresses',{headers:{
          authorization:`Bearer ${localStorage.getItem('token')}`
     }}).then((res)=>{
        
@@ -31,7 +31,6 @@
       list: [],
     }
   },
-
   methods: {
 
       del(obj,item,newitem)
