@@ -1,9 +1,9 @@
 <template>
   <div id="geren">
 <h2 id="img">
-  <img src="img/02.jpg"/><span>陈钰琪</span>
+  <img :src="user.active |img"/><span>{{user.userName}}</span>
+  <button class="tuichu" @click="tuichu">退出登录</button>
 </h2>
-
 <section>
   <figure>
     <span>12</span>
@@ -47,6 +47,7 @@
      <figcaption>退货退款</figcaption>
    </figure>
     </div>
+     <van-dialog @confirm="sussess" v-model="show" title="亲, 确定退出吗？" show-cancel-button></van-dialog>
     <div id="cont">
     <van-cell @click="getdingdan" title="我的订单" is-link />
     <van-cell title="我的发布" is-link />
@@ -60,14 +61,57 @@
   </div>
 </template>
 <script scoped>
+import { Notify } from 'vant';
+import axios from 'axios';
 export default {
-  
+    data()
+    {
+      return{
+        active:0,
+        user:{},
+        show:false,
+      }
+    },
+    filters:{
+      img(val)
+      {
+       if(val)
+       {
+        return 'http://api.cat-shop.penkuoer.com'+val
+       }
+       return 'img/02.jpg'
+      }
+    },
+    created()
+    {   
+      axios.get('http://api.cat-shop.penkuoer.com/api/v1/users/info',{headers:{
+         authorization:`Bearer ${localStorage.getItem('token')}`
+      }}).then((res)=>{this.user=res.data});
+      
+    },
+    methods:{
+      getdingdan()
+      {
+      },
+      tuichu()
+      {
+     this.show=true;
+      },
+      sussess()
+      {
+         Notify('退出成功!')
+      localStorage.removeItem('token')
+      this.$router.push({ name: 'index' })
+      }
+      
+    }
 }
 </script>
 <style scoped>
 #img{
   height: 100px;
-  padding-left: 20px
+  padding-left: 20px;
+  overflow: hidden;
 
 }
 
@@ -115,7 +159,18 @@ h4 {
   justify-content: space-around;
   align-items: center;
 }
+.tuichu{
+  float: right;
+  border: 0;
+  line-height: 30px;
+  height: 30px;
+  background: orange;
+  color: white;
+  margin-top: 30px;
+  border-radius: 20px
+  
 
+}
 
 #cart figure{
   display: flex;

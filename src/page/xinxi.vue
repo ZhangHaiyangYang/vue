@@ -12,7 +12,8 @@ export default {
     data()
     {
         return{
-            imageURL:'../img/02.jpg'
+            imageURL:'../img/02.jpg',
+            active:0
         }
     },
     components:{

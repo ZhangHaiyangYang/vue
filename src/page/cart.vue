@@ -45,7 +45,8 @@ export default {
           show:false,
           flag_s:true,
           num_s:0,
-            aobj:[]
+            aobj:[],
+            active:0
           
          
         }
@@ -130,7 +131,7 @@ export default {
             
           }
           else{
-            console.log(this.num_s)
+            
              if(this.num_s==this.arr.length)
              {
                 this.arr[i].checked=false;

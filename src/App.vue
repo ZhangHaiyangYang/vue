@@ -28,18 +28,16 @@ export default {
   computed:{
     ...mapState(['isshow']),
   },
-
    data() {
     return {
-      action:0
+      action:0,
+      active:0
     }
   },
   methods: {
     onClickLeft() {
       window.history.go(-1); 
-    
       }
-     
     },
   
 };

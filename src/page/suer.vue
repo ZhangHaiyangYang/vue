@@ -2,7 +2,7 @@
     <div id="sure">
       <p class="din">订单确认</p>
 
-      <article>
+      <article @click="changeaderss">
     <div id="cont">
     <van-icon name="location" />
     <section>
@@ -44,6 +44,7 @@
 import { Notify } from 'vant';
 import axios from 'axios';
 import { notDeepStrictEqual } from 'assert';
+import { constants } from 'crypto';
 export default {
     data()
     {
@@ -54,6 +55,7 @@ export default {
            datas:{},
            arrs:[],
            show:false,
+           active:0
         }
     },
     filters:{
@@ -71,6 +73,9 @@ export default {
            Notify({message:'支付成功',background:'green'})
            this.show=false;
         },
+        changeaderss(){
+            this.$router.push({name:'adresslist',query:{flag:true}})
+        },
         close(){
             Notify({
                 message:"交易取消！",
@@ -81,12 +86,13 @@ export default {
         onSubmit()
         {
              this.show=true;
-             this.datas. orderDetails=this.arrs;
-           /* axios.post('http://api.cat-shop.penkuoer.com/api/v1/orders',this.datas,{headers:{
+             this.datas.orderDetails=this.arrs;
+            axios.post('http://api.cat-shop.penkuoer.com/api/v1/orders',this.datas,{headers:{
                 authorization:`Bearer ${localStorage.getItem('token')}`
             }}).then((res)=>{
+                
                         
-            })*/
+            })
             
         }
     },
@@ -100,7 +106,14 @@ export default {
         })
         if(this.$route.query.id)
         {
-      
+            axios.get('https://api.cat-shop.penkuoer.com/api/v1/addresses/'+this.$route.query.id,{headers:{
+         authorization:`Bearer ${localStorage.getItem('token')}`
+    }}).then((res)=>{
+            
+            this.aderss=res.data;
+         this.getdatas({ address: res.data.address, regions: res.data.regions,receiver:res.data.receiver})
+         
+    })
         }
         else{
             axios.get('https://api.cat-shop.penkuoer.com/api/v1/addresses',{headers:{

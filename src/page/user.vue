@@ -38,7 +38,7 @@
  
   <img width="50px" height="50px" class="head-img" src="img/user.jpg" ref="goodsImg"/>
 </van-uploader>
-<p><button class="bu">登录</button> <button @click="adduser" class="bu">注册</button></p>
+<p><button @click="dl" class="bu">登录</button> <button @click="adduser" class="bu">注册</button></p>
 <van-dialog v-model="show" title="请输入用户名及密码" show-cancel-button></van-dialog>
 </div>
 </template>
@@ -51,6 +51,7 @@ export default {
     {
         return{
             password2:'',
+            active:0,
             show:false,
             user:{
                 userName:'',
@@ -58,7 +59,6 @@ export default {
                  avatar:'',
                  nickName:''
             }
-
         }
     },
     methods:{
@@ -84,6 +84,10 @@ axios.post('https://api.cat-shop.penkuoer.com/api/v1/common/file_upload',formdat
                    axios.post('https://api.cat-shop.penkuoer.com/api/v1/auth/reg',this.user).then((res)=>{
                 
                      localStorage.setItem('token',res.data.token);
+                     Notify({
+                       message:"注册成功",
+                       background:'green'
+                     })
                    })
                }
                else{
@@ -97,8 +101,26 @@ axios.post('https://api.cat-shop.penkuoer.com/api/v1/common/file_upload',formdat
       
            }
           
+        },
+        dl()
+        {
+           axios.post('https://api.cat-shop.penkuoer.com/api/v1/auth/login',{userName:this.user.userName,password:this.user.password}).then(res=>{
+             console.log(res)
+           if(res.data.code=="error")
+           {
+             Notify('用户密码或账号错误');
+           }
+           else{
+            localStorage.setItem('token',res.data.token)
+                     
+              Notify({
+                message:'登录成功',
+                background:'green'
+              })
+              this.$router.push({name:'index'})
+           }
+           })
         }
-
     }
 }
 </script>
@@ -124,8 +146,6 @@ axios.post('https://api.cat-shop.penkuoer.com/api/v1/common/file_upload',formdat
 .add{
     line-height: 50px
 }
-img{
-  
-}
+
 </style>
 

@@ -89,6 +89,7 @@ export default {
        show: false,
        value:1,
        nums:0,
+       active:0,
     }
   },
   created(){
